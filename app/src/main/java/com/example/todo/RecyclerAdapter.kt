@@ -4,14 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.data.Todo
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>(){
 
-    private val todoList = mutableListOf<String>()
+    private val todoList = mutableListOf<Todo>()
 
-    fun setItem(item: String) {
-        todoList.add(item)
+    fun setItem(items: List<Todo>) {
+        todoList.clear()
+        todoList.addAll(items)
         notifyDataSetChanged()
     }
 
@@ -31,7 +33,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         holder.view.let{
             it.sampleImg.setImageResource(R.mipmap.ic_launcher_round)
-            it.sampleTxt.text = todoList[position]
+            it.sampleTxt.text = todoList[position].todoTitle
         }
     }
 }
