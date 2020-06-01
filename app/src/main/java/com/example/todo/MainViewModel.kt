@@ -1,12 +1,19 @@
 package com.example.todo
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.todo.data.Todo
+import com.example.todo.data.TodoRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainViewModel : ViewModel() {
-    val todo = MutableLiveData<String>()
+class MainViewModel(private val repository: TodoRepository) : ViewModel() {
+    val todoList = repository.allTodoList
 
-    fun addItem(item: String) {
-        todo.value = item
+    fun insert(todo: Todo) = viewModelScope.launch {
+        withContext(Dispatchers.IO){
+            repository.insert(todo)
+        }
     }
 }
