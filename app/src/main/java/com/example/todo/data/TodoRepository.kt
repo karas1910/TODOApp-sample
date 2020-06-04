@@ -1,8 +1,9 @@
 package com.example.todo.data
 
 import androidx.annotation.WorkerThread
+import javax.inject.Inject
 
-class TodoRepository(private val todoDao: TodoDao) {
+class TodoRepository @Inject constructor(private val todoDao: TodoDao) {
     val allTodoList = todoDao.getAll()
 
     @WorkerThread
