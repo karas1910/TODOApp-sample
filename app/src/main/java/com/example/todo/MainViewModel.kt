@@ -7,8 +7,9 @@ import com.example.todo.data.TodoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MainViewModel(private val repository: TodoRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: TodoRepository) : ViewModel() {
     val todoList = repository.allTodoList
 
     fun insert(todo: Todo) = viewModelScope.launch {
