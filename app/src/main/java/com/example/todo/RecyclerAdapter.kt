@@ -11,16 +11,15 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>
 
     private val todoList = mutableListOf<Todo>()
 
-    fun setItem(items: List<Todo>) {
+    fun setItems(items: List<Todo>) {
         todoList.clear()
         todoList.addAll(items)
         notifyDataSetChanged()
     }
 
-    class RecyclerViewHolder(val view: View): RecyclerView.ViewHolder(view) {
-        val sampleImg = view.sampleImg
-        val sampleTxt = view.sampleTxt
-    }
+    fun getItems() = todoList
+
+    class RecyclerViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -36,4 +35,5 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>
             it.sampleTxt.text = todoList[position].todoTitle
         }
     }
+
 }

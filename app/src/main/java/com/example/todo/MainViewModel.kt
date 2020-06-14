@@ -17,4 +17,10 @@ class MainViewModel @Inject constructor(private val repository: TodoRepository) 
             repository.insert(todo)
         }
     }
+
+    fun delete(todo: Todo) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            repository.delete(todo)
+        }
+    }
 }
