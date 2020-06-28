@@ -35,5 +35,4 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>
             it.sampleTxt.text = todoList[position].todoTitle
         }
     }
-
 }

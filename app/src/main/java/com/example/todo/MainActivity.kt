@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         TodoApplication.component.mainViewModel()
     }
     private lateinit var adapter: RecyclerAdapter
+    private lateinit var recyclerViewController: RecyclerViewController
     private val swipeToDismissTouchHelper by lazy {
         getSwipeToDismissTouchHelper(adapter)
     }
@@ -28,21 +28,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = RecyclerAdapter()
-        main_recycler_view.let {
-            it.layoutManager = LinearLayoutManager(this)
-            it.adapter = adapter
-            it.setHasFixedSize(true)
-            swipeToDismissTouchHelper.attachToRecyclerView(it)
-        }
+//        adapter = RecyclerAdapter()
+//        main_recycler_view.let {
+//            it.layoutManager = LinearLayoutManager(this)
+//            it.adapter = adapter
+//            it.setHasFixedSize(true)
+//            swipeToDismissTouchHelper.attachToRecyclerView(it)
+//        }
 
+        recyclerViewController = RecyclerViewController(this, mainViewModel)
+        main_recycler_view.apply {
+            this.adapter = recyclerViewController.adapter
+            this.layoutManager = LinearLayoutManager(this@MainActivity)
+        }
+//        swipeToDismissTouchHelper.attachToRecyclerView(main_recycler_view)
         add_item_button.setOnClickListener {
             mainViewModel.insert(Todo(0, submit_text.text.toString()))
         }
 
-        mainViewModel.todoList.observe(this, Observer {
-            adapter.setItems(it)
-        })
+//        mainViewModel.todoList.observe(this, Observer {
+//            adapter.setItems(it)
+//        })
 
     }
 

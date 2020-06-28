@@ -41,6 +41,7 @@
         app:layout_constraintBottom_toTopOf="@+id/main_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/submit_text"
-        android:layout_marginRight="4dp" />
+        android:layout_marginEnd="4dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
